@@ -39,8 +39,8 @@ impl Board {
         }
     }
 
-        ///@brief displays each row with new line for each (and some padding)
-        pub fn display_board(self) -> String{
+    ///@brief displays each row with new line for each (and some padding)
+    pub fn display_board(self) -> String{
         let mut str = String::from("");
         for row in self.grid{
             for square in row {
