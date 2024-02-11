@@ -1,4 +1,5 @@
 use array_macro::array;
+use std::vec::Vec;
 use crate::pieces::Piece;
 use crate::square::Square;
 
@@ -6,69 +7,55 @@ const WIDTH: usize = 8;
 
 pub struct Board {
     grid: [[Square; WIDTH]; WIDTH],
-    current_player: char
+    //current player is stored at the end of the fen notation
 }
 
 impl Board {
     pub fn new() -> Board {
-        let s = Square::new();
-        Board {
-            grid: array![array![Square::new(); WIDTH]; WIDTH],
-            current_player: 'w'
+            let fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+            let mut grid = array![array![Square::new(); WIDTH]; WIDTH];
+            //sets the square colour :D
+            for x in (0..8).step_by(2) {
+                for y in (1..WIDTH).step_by(2) {
+                    grid[x][y].square_colour = grid[x][y].clone().change_colour();
+                }
+
+                for y in (0..WIDTH).step_by(2) {
+                    grid[x + 1][y].square_colour = grid[x + 1][y].clone().change_colour();
+                }
+            }
+
+
+
+            
+            let tokens: Vec<&str> = fen.split('/').collect();
+            //gonna add the piece gen thing here
+
+
+
+
+
+            Board {
+                grid
+            }
         }
 
-    }
 
-    pub fn display_board(self) -> String{
+        ///@brief displays each row with new line for each (and some padding)
+        pub fn display_board(self) -> String{
         let mut str = String::from("");
-        for i in self.grid{
-            for ii in i {
-                str.push(ii.get_square_colour());
-                str.push_str("  ");
+        for row in self.grid{
+            for square in row {
+                if square.piece == None {
+                    str.push(square.get_square_colour());
+                    str.push_str("  ");
+                }
+                else {str.push_str(&square.piece.unwrap().to_string());}
             }
             str.push_str("\n");
         }
         str
     }
 
-    pub fn add_pieces(self) {
-        (1..8usize)
-            .step_by(5)
-            .for_each(|x| {
-                (0..WIDTH)
-                    .for_each(|y| {
-                    });
-            })
-
-    }
-
-    pub fn add_colours(&mut self) {
-        /*
-        (1..=64usize)
-            .step_by(2)
-            .for_each(|i| {
-                let x: usize = i / WIDTH;
-                let y: usize = i % WIDTH;
-
-                self.grid[x][y].square_colour = self.grid[x][y].clone().change_colour();
-            });
-        */
-
-        (0..8usize)
-            .step_by(2)
-            .for_each(|x| {
-                (1..WIDTH)
-                    .step_by(2)
-                    .for_each(|y| {
-                        self.grid[x][y].square_colour = self.grid[x][y].clone().change_colour();
-                    });
-
-                (0..WIDTH)
-                    .step_by(2)
-                    .for_each(|y| {
-                        self.grid[x + 1][y].square_colour = self.grid[x + 1][y].clone().change_colour();
-                    });
-            })
-    }
 
 }
