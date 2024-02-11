@@ -1,7 +1,7 @@
 
 use crate::pieces::Piece;
 
-#[derive(Clone)]
+#[derive(Copy, Clone)]
 pub struct Square {
     pub piece: Option<Piece>,
     pub square_colour: char
