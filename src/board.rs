@@ -68,13 +68,13 @@ impl Board {
                 if square.piece == None {
                     str.push(square.get_square_colour());
                     str.push_str("  ");
+                } else {
+                    str.push_str(&square.piece.unwrap().to_string());
+                    str.push_str("  ");
                 }
-                else {str.push_str(&square.piece.unwrap().to_string());}
             }
             str.push_str("\n");
         }
         str
     }
-
-
 }
