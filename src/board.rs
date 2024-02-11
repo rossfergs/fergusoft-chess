@@ -12,32 +12,21 @@ pub struct Board {
 
 impl Board {
     pub fn new() -> Board {
-            let fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-            let mut grid = array![array![Square::new(); WIDTH]; WIDTH];
-            //sets the square colour :D
-            for x in (0..8).step_by(2) {
-                for y in (1..WIDTH).step_by(2) {
-                    grid[x][y].square_colour = grid[x][y].clone().change_colour();
-                }
+        let fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+        let tokens: Vec<&str> = fen.split('/').collect();
+        let mut new_grid = array![array![Square::new(); WIDTH]; WIDTH];
+        //gonna add the piece gen thing here
 
-                for y in (0..WIDTH).step_by(2) {
-                    grid[x + 1][y].square_colour = grid[x + 1][y].clone().change_colour();
-                }
-            }
+        let new = Board {
+            grid: new_grid
+        };
+        // Sets the square colour :D
+        // Split into separate function for readability
+        new.add_colours();
 
+        return new;
+    }
 
-
-            
-            let tokens: Vec<&str> = fen.split('/').collect();
-            //gonna add the piece gen thing here
-
-
-
-
-
-            Board {
-                grid
-            }
     fn add_colours(mut self) {
         for x in (0..8).step_by(2) {
             (1..WIDTH).step_by(2).for_each(|y| {
