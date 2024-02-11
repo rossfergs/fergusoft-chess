@@ -12,18 +12,18 @@ pub struct Board {
 
 impl Board {
     pub fn new() -> Board {
-        let fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-        let tokens: Vec<&str> = fen.split('/').collect();
-        //gonna add the piece gen thing here
-
-        let mut new_grid = array![array![Square::new(); WIDTH]; WIDTH];
         let mut new = Board {
-            grid: {
-                new_grid
-            }
+            grid: [[Square::new(); WIDTH]; WIDTH]
         };
+
         // Sets the square colour :D (Split into separate function for readability)
         new.add_colours();
+
+        // Read default board setup
+        let fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+        let tokens: Vec<&str> = fen.split('/').collect();
+        new.populate(tokens);
+
         return new;
     }
 
