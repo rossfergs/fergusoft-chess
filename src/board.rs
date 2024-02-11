@@ -27,6 +27,27 @@ impl Board {
         return new;
     }
 
+    fn populate(&mut self, input_position: Vec<&str>) {
+        (0..WIDTH)
+            .for_each(|i| {
+                let mut col: usize = 0;
+                input_position[i]
+                    .chars()
+                    .for_each(|c| {
+                        if c.is_digit(10) {
+                            col += c
+                                .to_digit(10)
+                                .expect("Error in reading pieces onto board") as usize;
+                        } else {
+                            let row = 7 - i;
+                            let new_piece = Piece::new(c);
+                            self.grid[row][col].piece = Some(new_piece);
+                            col += 1;
+                        }
+                    })
+            });
+    }
+
     fn add_colours(&mut self) {
         for x in (0..8).step_by(2) {
             (1..WIDTH).step_by(2).for_each(|y| {
