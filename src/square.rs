@@ -12,7 +12,7 @@ impl Square {
     pub fn new() -> Square {
         Square {
             piece: None,
-            square_colour: 'w'
+            square_colour: '#'
         }
     }
 
@@ -21,10 +21,10 @@ impl Square {
     // }
 
     pub fn change_colour(mut self) -> char {
-        if self.square_colour == 'w' {
-            return 'b';
+        if self.square_colour == '#' {
+            return '+';
         }
-        return 'w';
+        return '#';
     }
 
     pub fn check_empty(self) {

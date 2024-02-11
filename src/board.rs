@@ -20,7 +20,7 @@ impl Board {
         new.add_colours();
 
         // Read default board setup
-        let fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+        let fen = "1n1Rkb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2K5";
         let tokens: Vec<&str> = fen.split('/').collect();
         new.populate(tokens);
 
