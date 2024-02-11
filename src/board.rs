@@ -38,8 +38,17 @@ impl Board {
             Board {
                 grid
             }
-        }
+    fn add_colours(mut self) {
+        for x in (0..8).step_by(2) {
+            (1..WIDTH).step_by(2).for_each(|y| {
+                self.grid[x][y].square_colour = self.grid[x][y].clone().change_colour();
+            });
 
+            (0..WIDTH).step_by(2).for_each(|y| {
+                self.grid[x + 1][y].square_colour = self.grid[x + 1][y].clone().change_colour();
+            });
+        }
+    }
 
         ///@brief displays each row with new line for each (and some padding)
         pub fn display_board(self) -> String{
