@@ -29,21 +29,11 @@ impl Board {
 
             
             let tokens: Vec<&str> = fen.split('/').collect();
-            for i in 0..8{
-                let mut col = 0;
-                for char in tokens[i].chars(){
-                    if char.is_digit(10){
-                        col += char.to_digit(10).unwrap() as usize;
-                    }else{
-                        let row = 7 - i;
-                        let new_piece = Piece::new(char);
-                        grid[row][col].piece = Some(new_piece);
-                        col+= 1;
-                    }
-                    
-                }
-            }
             //gonna add the piece gen thing here
+
+
+
+
 
             Board {
                 grid
@@ -51,8 +41,8 @@ impl Board {
         }
 
 
-        ///@brief displays each row with new line for each (and some padding)
-        pub fn display_board(self) -> String{
+    ///@brief displays each row with new line for each (and some padding)
+    pub fn display_board(self) -> String{
         let mut str = String::from("");
         for row in self.grid{
             for square in row {
