@@ -20,19 +20,19 @@ impl Square {
     //     self.piece = new_piece;
     // }
 
-    pub fn change_colour(mut self) -> char {
+    pub fn change_colour(self) -> char {
         if self.square_colour == 'w' {
             return 'b';
         }
         return 'w';
     }
 
-    pub fn check_empty(self) {
-        match self.piece {
-            Some(x) => println!("{x}"),
-            None => println!("None.")
-        }
-    }
+    // pub fn check_empty(self) {
+    //     match self.piece {
+    //         Some(x) => println!("{x}"),
+    //         None => println!("None.")
+    //     }
+    // }
     pub fn get_square_colour(self) -> char{
         self.square_colour
     }

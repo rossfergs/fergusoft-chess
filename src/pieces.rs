@@ -4,11 +4,11 @@ use std::fmt::{Display, Formatter};
 #[derive(Clone, PartialEq)]
 pub struct Piece {
     //no piece colour cus we use upper case and lower case fo rthe colour
-    piece: String,
+    piece: char,
 }
 
 impl Piece {
-    pub fn new( new_piece: String) -> Piece {
+    pub fn new( new_piece: char) -> Piece {
         Piece {
             piece: new_piece,
         }
