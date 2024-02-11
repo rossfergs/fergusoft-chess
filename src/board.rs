@@ -14,20 +14,20 @@ impl Board {
     pub fn new() -> Board {
         let fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
         let tokens: Vec<&str> = fen.split('/').collect();
-        let mut new_grid = array![array![Square::new(); WIDTH]; WIDTH];
         //gonna add the piece gen thing here
 
-        let new = Board {
-            grid: new_grid
+        let mut new_grid = array![array![Square::new(); WIDTH]; WIDTH];
+        let mut new = Board {
+            grid: {
+                new_grid
+            }
         };
-        // Sets the square colour :D
-        // Split into separate function for readability
+        // Sets the square colour :D (Split into separate function for readability)
         new.add_colours();
-
         return new;
     }
 
-    fn add_colours(mut self) {
+    fn add_colours(&mut self) {
         for x in (0..8).step_by(2) {
             (1..WIDTH).step_by(2).for_each(|y| {
                 self.grid[x][y].square_colour = self.grid[x][y].clone().change_colour();
